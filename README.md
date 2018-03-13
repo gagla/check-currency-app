@@ -1,1 +1,1 @@
-Check Currency App based on N B P apigit
+Check Currency App based on N B P api
