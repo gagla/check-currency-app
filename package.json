@@ -2,7 +2,7 @@
   "name": "nbp-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/gagla/check-currency-app",
+  "homepage": "http://gagla.github.io/check-currency-app",
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.0.0",

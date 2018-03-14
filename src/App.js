@@ -7,11 +7,11 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
 import Clock from './Components/Clock.js';
 import RatesTable from './Components/RatesTable.js';
 import SearchCurrRates from './Components/SearchCurrRates.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import GetData from './GetData.js'
 
 
 
@@ -23,7 +23,8 @@ class App extends React.Component {
   //grabbing data from the first url form nbp api website to display the table with various currencies when app is loaded; 
   //data from this url is also used to display currency codes in SearchCurrRates component - that's it is loaded here, not in RatesTable component
   componentDidMount() {
-    axios.get(`http://api.nbp.pl/api/exchangerates/tables/C/last`)
+    let path = '/tables/C/last';
+    GetData.getData(path)
       .then(res => {
         const rates = res.data[0].rates;
         const dateRates = res.data[0].effectiveDate;
@@ -46,10 +47,10 @@ class App extends React.Component {
         <Clock />
         <div className="container">
           <div className="row">
-            <div className="col-8">
+            <div className="col-xs-12 col-sm-6 col-md-8">
               <RatesTable rates={this.state.rates} dateRates={this.state.dateRates} />
             </div>
-            <div className="col-4">
+            <div className="col-xs-6 col-md-4">
               <SearchCurrRates rates={this.state.rates} />
             </div>
           </div>
@@ -58,6 +59,7 @@ class App extends React.Component {
     );
   }
 }
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

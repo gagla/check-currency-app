@@ -1,6 +1,7 @@
 import React from 'react';
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import GetData from '../GetData.js';
+import '../App.css';
 
 class SearchCurrRates extends React.Component {
     state = {
@@ -11,7 +12,10 @@ class SearchCurrRates extends React.Component {
     //grabbing data from the second url form nbp api website to display the table with the # of last rates and selected currency chosen by the user; data is loaded when the user submits the form
     handleSubmit = (event) => {
         event.preventDefault();
-        axios.get(`http://api.nbp.pl/api/exchangerates/rates/C/${this.state.code}/last/${this.state.topCount}/`)
+        let headerVis = document.querySelector('#searchHeader');
+        headerVis.classList.remove("vis");
+        let path = `/rates/C/${this.state.code}/last/${this.state.topCount}/`
+        GetData.getData(path)
             .then(resp => {
                 const toprates = resp.data.rates;
                 this.setState({ toprates });
@@ -47,7 +51,7 @@ class SearchCurrRates extends React.Component {
                     <hr />
                 </form>
                 <table className="table">
-                    <thead className="thead-dark">
+                    <thead className="thead-dark vis" id="searchHeader">
                         <tr>
                             <th>#</th>
                             <th>Date</th>
